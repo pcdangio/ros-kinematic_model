@@ -19,7 +19,7 @@ bool hinge_t::set_axis_definition(double x, double y, double z)
 {
     if(hinge_t::is_locked())
     {
-        ROS_ERROR_STREAM("failed to set axis for hinge [" << hinge_t::name() << "] (editing is locked)");
+        ROS_ERROR_STREAM("failed to set axis for hinge joint [" << hinge_t::name() << "] (editing is locked)");
         return false;
     }
 
