@@ -20,12 +20,18 @@ public:
     std::string name() const;
     type_t object_type() const;
 
+    void lock();
+
 protected:
     object_t(const std::string& name, type_t type);
+
+    bool is_locked() const;
 
 private:
     std::string m_name;
     type_t m_object_type;
+
+    bool m_locked;
 };
 
 }}}
