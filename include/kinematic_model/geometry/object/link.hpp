@@ -1,7 +1,7 @@
 #ifndef KINEMATIC_MODEL___GEOMETRY___OBJECT___LINK_H
 #define KINEMATIC_MODEL___GEOMETRY___OBJECT___LINK_H
 
-#include <kinematic_model/geometry/object/object.h>
+#include <kinematic_model/geometry/object/object.hpp>
 
 namespace kinematic_model {
 namespace geometry {

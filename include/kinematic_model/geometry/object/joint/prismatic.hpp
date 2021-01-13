@@ -1,18 +1,18 @@
-#ifndef KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___HINGE_H
-#define KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___HINGE_H
+#ifndef KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___PRISMATIC_H
+#define KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___PRISMATIC_H
 
-#include <kinematic_model/geometry/object/joint/joint.h>
+#include <kinematic_model/geometry/object/joint/joint.hpp>
 
 namespace kinematic_model {
 namespace geometry {
 namespace object {
 namespace joint {
 
-class hinge_t
+class prismatic_t
     : public joint_t
 {
 public:
-    hinge_t(const std::string& name, uint32_t state_index);
+    prismatic_t(const std::string& name, uint32_t state_index);
 
     bool set_axis_definition(double x, double y, double z);
 

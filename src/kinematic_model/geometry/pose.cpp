@@ -1,4 +1,4 @@
-#include <kinematic_model/geometry/pose.h>
+#include <kinematic_model/geometry/pose.hpp>
 
 using namespace kinematic_model::geometry;
 

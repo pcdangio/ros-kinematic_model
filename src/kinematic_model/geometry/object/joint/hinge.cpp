@@ -1,4 +1,4 @@
-#include <kinematic_model/geometry/object/joint/hinge.h>
+#include <kinematic_model/geometry/object/joint/hinge.hpp>
 
 #include <ros/console.h>
 

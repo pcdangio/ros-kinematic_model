@@ -1,8 +1,8 @@
 #ifndef KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___JOINT_H
 #define KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___JOINT_H
 
-#include <kinematic_model/geometry/object/object.h>
-#include <kinematic_model/geometry/transform.h>
+#include <kinematic_model/geometry/object/object.hpp>
+#include <kinematic_model/geometry/transform.hpp>
 
 namespace kinematic_model {
 namespace geometry {

@@ -1,4 +1,4 @@
-#include <kinematic_model/geometry/object/link.h>
+#include <kinematic_model/geometry/object/link.hpp>
 
 using namespace kinematic_model::geometry::object;
 

@@ -1,4 +1,4 @@
-#include <kinematic_model/geometry/object/joint/floating.h>
+#include <kinematic_model/geometry/object/joint/floating.hpp>
 
 using namespace kinematic_model::geometry;
 using namespace kinematic_model::geometry::object::joint;

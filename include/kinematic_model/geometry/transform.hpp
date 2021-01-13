@@ -1,7 +1,7 @@
 #ifndef KINEMATIC_MODEL___GEOMETRY___TRANSFORM_H
 #define KINEMATIC_MODEL___GEOMETRY___TRANSFORM_H
 
-#include <kinematic_model/geometry/pose.h>
+#include <kinematic_model/geometry/pose.hpp>
 
 #include <eigen3/Eigen/Dense>
 

@@ -1,4 +1,4 @@
-#include <kinematic_model/geometry/object/joint/prismatic.h>
+#include <kinematic_model/geometry/object/joint/prismatic.hpp>
 
 #include <ros/console.h>
 

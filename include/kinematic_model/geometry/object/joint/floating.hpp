@@ -1,7 +1,7 @@
 #ifndef KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___FLOATING_H
 #define KINEMATIC_MODEL___GEOMETRY___OBJECT___JOINT___FLOATING_H
 
-#include <kinematic_model/geometry/object/joint/joint.h>
+#include <kinematic_model/geometry/object/joint/joint.hpp>
 
 namespace kinematic_model {
 namespace geometry {

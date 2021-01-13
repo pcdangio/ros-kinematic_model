@@ -1,4 +1,4 @@
-#include <kinematic_model/geometry/object/object.h>
+#include <kinematic_model/geometry/object/object.hpp>
 
 using namespace kinematic_model::geometry::object;
 
