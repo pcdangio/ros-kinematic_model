@@ -26,5 +26,5 @@ const Eigen::Vector3d& pose_t::position() const
 }
 const Eigen::Quaterniond& pose_t::orientation() const
 {
-    return pose_t::m_orientation
+    return pose_t::m_orientation;
 }
