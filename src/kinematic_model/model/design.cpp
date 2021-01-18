@@ -6,7 +6,7 @@ using namespace kinematic_model::model;
 
 bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object)
 {
-    design_t::add_object(object, nullptr, nullptr);
+    return design_t::add_object(object, nullptr, nullptr);
 }
 bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, const std::shared_ptr<geometry::attachment::attachment_t>& attachment)
 {
@@ -15,6 +15,16 @@ bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& obj
     {
         ROS_ERROR("failed to add object to model design (object is nullptr)");
         return false;
+    }
+
+    // Check that object with same name doesn't already exist.
+    for(auto instruction = design_t::m_instructions.cbegin(); instruction != design_t::m_instructions.cend(); ++instruction)
+    {
+        if(instruction->object->name() == object->name())
+        {
+            ROS_ERROR_STREAM("failed to add object [" << object->name() << "] to model design (object with same name already exists)");
+            return false;
+        }
     }
 
     // If a parent is given, ensure that it exists in the design.
