@@ -15,6 +15,11 @@ hinge_t::hinge_t(const std::string& name, uint32_t state_index)
     hinge_t::m_axis_definition = Eigen::Vector3d::UnitZ();
 }
 
+std::shared_ptr<hinge_t> hinge_t::create(const std::string& name, uint32_t state_index)
+{
+    return std::make_shared<hinge_t>(name, state_index);
+}
+
 bool hinge_t::set_axis_definition(double x, double y, double z)
 {
     if(hinge_t::is_locked())

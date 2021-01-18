@@ -13,6 +13,7 @@ class hinge_t
 {
 public:
     hinge_t(const std::string& name, uint32_t state_index);
+    static std::shared_ptr<hinge_t> create(const std::string& name, uint32_t state_index);
 
     bool set_axis_definition(double x, double y, double z);
 

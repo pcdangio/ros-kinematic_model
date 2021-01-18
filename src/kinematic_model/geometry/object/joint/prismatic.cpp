@@ -14,6 +14,10 @@ prismatic_t::prismatic_t(const std::string& name, uint32_t state_index)
     // Set default axis definition.
     prismatic_t::m_axis_definition = Eigen::Vector3d::UnitZ();
 }
+std::shared_ptr<prismatic_t> prismatic_t::create(const std::string& name, uint32_t state_index)
+{
+    return std::make_shared<prismatic_t>(name, state_index);
+}
 
 bool prismatic_t::set_axis_definition(double x, double y, double z)
 {

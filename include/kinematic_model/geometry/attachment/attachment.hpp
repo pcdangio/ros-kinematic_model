@@ -3,6 +3,8 @@
 
 #include <kinematic_model/geometry/transform.hpp>
 
+#include <memory>
+
 namespace kinematic_model {
 namespace geometry {
 namespace attachment {

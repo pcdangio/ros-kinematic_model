@@ -12,6 +12,8 @@ class frame_t
 {
 public:
     frame_t(const std::string& name);
+
+    static std::shared_ptr<frame_t> create(const std::string& name);
 };
 
 }}}

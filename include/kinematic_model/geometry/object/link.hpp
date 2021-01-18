@@ -12,6 +12,8 @@ class link_t
 {
 public:
     link_t(const std::string& name);
+
+    static std::shared_ptr<link_t> create(const std::string& name);
 };
 
 }}}

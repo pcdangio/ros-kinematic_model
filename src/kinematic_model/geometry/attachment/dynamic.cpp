@@ -17,6 +17,10 @@ dynamic_t::dynamic_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t st
     dynamic_t::m_state_index_qy = state_index_qy;
     dynamic_t::m_state_index_qz = state_index_qz;
 }
+std::shared_ptr<dynamic_t> dynamic_t::create(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
+{
+    return std::make_shared<dynamic_t>(state_index_x, state_index_y, state_index_z, state_index_qw, state_index_qx, state_index_qy, state_index_qz);
+}
 
 // METHODS
 kinematic_model::geometry::transform_t dynamic_t::get_transform(const Eigen::VectorXd& state_vector) const
