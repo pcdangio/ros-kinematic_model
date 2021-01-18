@@ -15,9 +15,8 @@ class joint_t
 public:
     enum class type_t
     {
-        FLOAT = 0,
-        HINGE = 1,
-        PRISMATIC = 2
+        HINGE = 0,
+        PRISMATIC = 1
     };
 
     type_t joint_type() const;
