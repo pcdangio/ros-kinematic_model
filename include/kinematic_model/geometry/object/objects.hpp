@@ -4,8 +4,6 @@
 #include <kinematic_model/geometry/object/object.hpp>
 #include <kinematic_model/geometry/object/link.hpp>
 #include <kinematic_model/geometry/object/frame.hpp>
-#include <kinematic_model/geometry/object/joint/joint.hpp>
-#include <kinematic_model/geometry/object/joint/hinge.hpp>
-#include <kinematic_model/geometry/object/joint/prismatic.hpp>
+#include <kinematic_model/geometry/object/joint.hpp>
 
 #endif

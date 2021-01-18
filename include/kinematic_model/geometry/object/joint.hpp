@@ -15,19 +15,25 @@ class joint_t
 public:
     enum class type_t
     {
-        HINGE = 0,
+        REVOLUTE = 0,
         PRISMATIC = 1
     };
 
+    joint_t(const std::string& name, type_t type, uint32_t state_index);
+
+    static std::shared_ptr<joint_t> create(const std::string& name, type_t type, uint32_t state_index);
+
     type_t joint_type() const;
 
-    virtual transform_t get_transform(const Eigen::VectorXd& state_vector) const = 0;
+    bool set_axis_definition(double x, double y, double z);
 
-protected:
-    joint_t(const std::string& name, type_t type);
+    transform_t get_transform(const Eigen::VectorXd& state_vector) const;
 
 private:
     type_t m_joint_type;
+    Eigen::Vector3d m_axis_definition;
+
+    uint32_t m_state_index;
 };
 
 }}}}

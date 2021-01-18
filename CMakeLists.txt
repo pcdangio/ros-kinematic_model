@@ -138,9 +138,7 @@ add_executable(${PROJECT_NAME}_node
   src/kinematic_model/geometry/object/object.cpp
   src/kinematic_model/geometry/object/link.cpp
   src/kinematic_model/geometry/object/frame.cpp
-  src/kinematic_model/geometry/object/joint/joint.cpp
-  src/kinematic_model/geometry/object/joint/hinge.cpp
-  src/kinematic_model/geometry/object/joint/prismatic.cpp
+  src/kinematic_model/geometry/object/joint.cpp
   src/kinematic_model/geometry/attachment/attachment.cpp
   src/kinematic_model/geometry/attachment/fixed.cpp
   src/kinematic_model/geometry/attachment/dynamic.cpp
