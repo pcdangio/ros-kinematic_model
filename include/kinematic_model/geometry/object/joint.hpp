@@ -7,7 +7,6 @@
 namespace kinematic_model {
 namespace geometry {
 namespace object {
-namespace joint {
 
 class joint_t
     : public object_t
@@ -20,8 +19,6 @@ public:
     };
 
     joint_t(const std::string& name, type_t type, uint32_t state_index);
-
-    static std::shared_ptr<joint_t> create(const std::string& name, type_t type, uint32_t state_index);
 
     type_t joint_type() const;
 
@@ -36,6 +33,6 @@ private:
     uint32_t m_state_index;
 };
 
-}}}}
+}}}
 
 #endif

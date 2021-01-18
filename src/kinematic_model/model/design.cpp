@@ -4,6 +4,21 @@
 
 using namespace kinematic_model::model;
 
+// FACTORY
+std::shared_ptr<kinematic_model::geometry::object::link_t> design_t::create_link(const std::string& name)
+{
+    return std::make_shared<geometry::object::link_t>(name);
+}
+std::shared_ptr<kinematic_model::geometry::object::frame_t> design_t::create_frame(const std::string& name)
+{
+    return std::make_shared<geometry::object::frame_t>(name);
+}
+std::shared_ptr<kinematic_model::geometry::object::joint_t> design_t::create_joint(const std::string& name, geometry::object::joint_t::type_t type, uint32_t state_index)
+{
+    return std::make_shared<geometry::object::joint_t>(name, type, state_index);
+}
+
+// ADDING
 bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object)
 {
     return design_t::add_object(object, nullptr, nullptr);
@@ -62,6 +77,9 @@ bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& obj
 
     // Add object to instructions.
     design_t::m_instructions.push_back({object, parent, attachment});
+
+    // Lock the object so it can no longer be edited.
+    object->lock();
 
     return true;
 }

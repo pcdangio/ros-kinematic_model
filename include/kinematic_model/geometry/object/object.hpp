@@ -2,7 +2,6 @@
 #define KINEMATIC_MODEL___GEOMETRY___OBJECT___OBJECT_H
 
 #include <string>
-#include <memory>
 
 namespace kinematic_model {
 namespace geometry {

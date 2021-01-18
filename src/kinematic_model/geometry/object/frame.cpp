@@ -7,8 +7,3 @@ frame_t::frame_t(const std::string& name)
 {
 
 }
-
-std::shared_ptr<frame_t> frame_t::create(const std::string& name)
-{
-    return std::make_shared<frame_t>(name);
-}

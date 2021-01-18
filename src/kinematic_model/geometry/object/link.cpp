@@ -7,8 +7,3 @@ link_t::link_t(const std::string& name)
 {
 
 }
-
-std::shared_ptr<link_t> link_t::create(const std::string& name)
-{
-    return std::make_shared<link_t>(name);
-}
