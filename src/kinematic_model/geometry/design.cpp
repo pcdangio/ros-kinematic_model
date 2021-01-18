@@ -1,30 +1,30 @@
-#include <kinematic_model/model/design.hpp>
+#include <kinematic_model/geometry/design.hpp>
 
 #include <ros/console.h>
 
-using namespace kinematic_model::model;
+using namespace kinematic_model::geometry;
 
 // FACTORY
-std::shared_ptr<kinematic_model::geometry::object::link_t> design_t::create_link(const std::string& name)
+std::shared_ptr<object::link_t> design_t::create_link(const std::string& name)
 {
-    return std::make_shared<geometry::object::link_t>(name);
+    return std::make_shared<object::link_t>(name);
 }
-std::shared_ptr<kinematic_model::geometry::object::frame_t> design_t::create_frame(const std::string& name)
+std::shared_ptr<object::frame_t> design_t::create_frame(const std::string& name)
 {
-    return std::make_shared<geometry::object::frame_t>(name);
+    return std::make_shared<object::frame_t>(name);
 }
-std::shared_ptr<kinematic_model::geometry::object::joint_t> design_t::create_joint(const std::string& name, geometry::object::joint_t::type_t type, uint32_t state_index)
+std::shared_ptr<object::joint_t> design_t::create_joint(const std::string& name, object::joint_t::type_t type, uint32_t state_index)
 {
-    return std::make_shared<geometry::object::joint_t>(name, type, state_index);
+    return std::make_shared<object::joint_t>(name, type, state_index);
 }
 
 // ADDING
-bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object)
+bool design_t::add_object(const std::shared_ptr<object::object_t>& object)
 {
     // Call base add_object() with empty parent/attachment.
     return design_t::add_object(object, nullptr, nullptr);
 }
-bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, double x, double y, double z, double roll, double pitch, double yaw)
+bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, double x, double y, double z, double roll, double pitch, double yaw)
 {
     // Create a fixed attachment.
 
@@ -34,20 +34,20 @@ bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& obj
                                      Eigen::AngleAxisd(yaw, Eigen::Vector3d::UnitZ());
 
     // Create attachment shared pointer.
-    auto attachment = std::make_shared<geometry::attachment::fixed_t>(x, y, z, orientation.w(), orientation.x(), orientation.y(), orientation.z());
+    auto attachment = std::make_shared<attachment::fixed_t>(x, y, z, orientation.w(), orientation.x(), orientation.y(), orientation.z());
 
     // Call base add_object().
     return design_t::add_object(object, parent, attachment);
 }
-bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
+bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
 {
     // Create dynamic attachment.
-    auto attachment = std::make_shared<geometry::attachment::dynamic_t>(state_index_x, state_index_y, state_index_z, state_index_qw, state_index_qx, state_index_qy, state_index_qz);
+    auto attachment = std::make_shared<attachment::dynamic_t>(state_index_x, state_index_y, state_index_z, state_index_qw, state_index_qx, state_index_qy, state_index_qz);
 
     // Call base add_object.
     return design_t::add_object(object, parent, attachment);
 }
-bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, const std::shared_ptr<geometry::attachment::attachment_t>& attachment)
+bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, const std::shared_ptr<attachment::attachment_t>& attachment)
 {
     // Check that object exists.
     if(!object)
@@ -108,7 +108,7 @@ bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& obj
     return true;
 }
 
-std::vector<kinematic_model::model::design_t::instruction_t> design_t::instructions() const
+std::vector<design_t::instruction_t> design_t::instructions() const
 {
     return design_t::m_instructions;
 }
