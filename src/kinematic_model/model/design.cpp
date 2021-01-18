@@ -21,7 +21,31 @@ std::shared_ptr<kinematic_model::geometry::object::joint_t> design_t::create_joi
 // ADDING
 bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object)
 {
+    // Call base add_object() with empty parent/attachment.
     return design_t::add_object(object, nullptr, nullptr);
+}
+bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, double x, double y, double z, double roll, double pitch, double yaw)
+{
+    // Create a fixed attachment.
+
+    // Create quaternion from euler rotations.
+    Eigen::Quaterniond orientation = Eigen::AngleAxisd(roll, Eigen::Vector3d::UnitX()) *
+                                     Eigen::AngleAxisd(pitch, Eigen::Vector3d::UnitY()) *
+                                     Eigen::AngleAxisd(yaw, Eigen::Vector3d::UnitZ());
+
+    // Create attachment shared pointer.
+    auto attachment = std::make_shared<geometry::attachment::fixed_t>(x, y, z, orientation.w(), orientation.x(), orientation.y(), orientation.z());
+
+    // Call base add_object().
+    return design_t::add_object(object, parent, attachment);
+}
+bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
+{
+    // Create dynamic attachment.
+    auto attachment = std::make_shared<geometry::attachment::dynamic_t>(state_index_x, state_index_y, state_index_z, state_index_qw, state_index_qx, state_index_qy, state_index_qz);
+
+    // Call base add_object.
+    return design_t::add_object(object, parent, attachment);
 }
 bool design_t::add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, const std::shared_ptr<geometry::attachment::attachment_t>& attachment)
 {

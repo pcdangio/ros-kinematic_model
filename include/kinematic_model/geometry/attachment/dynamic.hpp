@@ -12,7 +12,6 @@ class dynamic_t
 {
 public:
     dynamic_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz);
-    static std::shared_ptr<dynamic_t> create(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz);
 
     transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
