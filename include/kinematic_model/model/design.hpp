@@ -22,7 +22,8 @@ public:
 
     std::vector<instruction_t> instructions() const;
 
-    bool add(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, const std::shared_ptr<geometry::attachment::attachment_t>& attachment);
+    bool add_object(const std::shared_ptr<geometry::object::object_t>& object);
+    bool add_object(const std::shared_ptr<geometry::object::object_t>& object, const std::shared_ptr<geometry::object::object_t>& parent, const std::shared_ptr<geometry::attachment::attachment_t>& attachment);
 
 private:
     std::vector<instruction_t> m_instructions;
