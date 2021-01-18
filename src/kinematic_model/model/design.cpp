@@ -13,13 +13,6 @@ bool design_t::add(const std::shared_ptr<geometry::object::object_t>& object, co
         return false;
     }
 
-    // Check that attachment exists.
-    if(!attachment)
-    {
-        ROS_ERROR_STREAM("failed to add object [" << object->name() << "] to model design (attachment is nullptr)");
-        return false;
-    }
-
     // Check if parent exists
     if(parent)
     {
@@ -35,11 +28,23 @@ bool design_t::add(const std::shared_ptr<geometry::object::object_t>& object, co
         }
 
         // If this point reached and parent_exists is still false, parent does not exist.
-        if(!parent_exists)
+        if(parent_exists)
         {
             ROS_ERROR_STREAM("failed to add object [" << object->name() << "] to model design (parent does not exist)");
             return false;
         }
+    }
+
+    // If a parent is given, ensure that an attachment is given.
+    if(parent && !attachment)
+    {
+        ROS_ERROR_STREAM("failed to add object [" << object->name() << "] to model design (has parent but attachment is nullptr)");
+        return false;
+    }
+    else if(!parent && attachment)
+    {
+        ROS_ERROR_STREAM("failed to add object [" << object->name() << "] to model design (has no parent and attachment is not nullptr)");
+        return false;
     }
 
     // Add object to instructions.
