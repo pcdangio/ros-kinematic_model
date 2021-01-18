@@ -143,7 +143,8 @@ add_executable(${PROJECT_NAME}_node
   src/kinematic_model/geometry/object/joint/prismatic.cpp
   src/kinematic_model/geometry/attachment/attachment.cpp
   src/kinematic_model/geometry/attachment/fixed.cpp
-  src/kinematic_model/geometry/attachment/dynamic.cpp)
+  src/kinematic_model/geometry/attachment/dynamic.cpp
+  src/kinematic_model/model/design.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
