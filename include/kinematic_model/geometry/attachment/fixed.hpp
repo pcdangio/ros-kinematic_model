@@ -12,7 +12,7 @@ class fixed_t
 {
 public:
     fixed_t(double x, double y, double z, double qw, double qx, double qy, double qz);
-    static std::shared_ptr<fixed_t> create(double x, double y, double z, double qw, double qx, double qy, double qz);
+    static std::shared_ptr<fixed_t> create(double x, double y, double z, double roll, double pitch, double yaw);
 
     transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
