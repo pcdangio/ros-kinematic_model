@@ -9,6 +9,7 @@ project(kinematic_model)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  kalman_filter
 )
 
 ## System dependencies are found with CMake's conventions
@@ -103,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES kinematic_model
-#  CATKIN_DEPENDS roscpp
+  CATKIN_DEPENDS kalman_filter
 #  DEPENDS system_lib
 )
 

@@ -11,6 +11,7 @@ class kinematic_model_t
 {
 public:
     kinematic_model_t();
+    ~kinematic_model_t();
 
     void run();
 
@@ -19,7 +20,10 @@ private:
     std::unique_ptr<ros::NodeHandle> m_node;
 
     // MODEL PLUGIN
-    std::shared_ptr<model_plugin_t> m_model_plugin;
+    model_plugin_t* m_model_plugin;
+    void* m_handle_model_plugin;
+    void load_model_plugin(const std::string& plugin_path);
+    void unload_model_plugin();
 };
 
 }
