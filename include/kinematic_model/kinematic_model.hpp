@@ -22,7 +22,7 @@ private:
     // MODEL PLUGIN
     model_plugin_t* m_model_plugin;
     void* m_handle_model_plugin;
-    void load_model_plugin(const std::string& plugin_path);
+    bool load_model_plugin();
     void unload_model_plugin();
 };
 

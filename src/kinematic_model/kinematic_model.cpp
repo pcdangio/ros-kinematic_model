@@ -14,14 +14,9 @@ kinematic_model_t::kinematic_model_t()
     kinematic_model_t::m_handle_model_plugin = nullptr;
 
     // Load the model plugin.
-    std::string p_plugin_path = kinematic_model_t::m_node->param<std::string>("model_plugin", "");
-    try
+    if(!kinematic_model_t::load_model_plugin())
     {
-        kinematic_model_t::load_model_plugin(p_plugin_path);
-    }
-    catch(std::exception& error)
-    {
-        ROS_FATAL_STREAM("failed to load model plugin (" << error.what() << ")");
+        ROS_FATAL("failed to load model plugin");
         ros::shutdown();
     }
 }
@@ -36,38 +31,52 @@ void kinematic_model_t::run()
     ros::spin();
 }
 
-void kinematic_model_t::load_model_plugin(const std::string& plugin_path)
+bool kinematic_model_t::load_model_plugin()
 {
+    std::string p_plugin_path = kinematic_model_t::m_node->param<std::string>("model_plugin", "");
+
     // Check that path was provided (otherwise dlsym gets handle to program)
-    if(plugin_path.empty())
+    if(p_plugin_path.empty())
     {
-        throw std::runtime_error("plugin path is empty");
+        ROS_ERROR("required parameter ~/model_plugin is empty");
+        return false;
     }
 
     // Open plugin's shared object library.
     // NOTE: dlclose is not needed.
-    void* so_handle = dlopen(plugin_path.c_str(), RTLD_NOW);
+    void* so_handle = dlopen(p_plugin_path.c_str(), RTLD_NOW);
     if(!so_handle)
     {
-        throw std::runtime_error(dlerror());
+        ROS_ERROR_STREAM("failed to open model plugin (" << dlerror() << ")");
+        return false;
     }
 
     // Get a reference to the create_model_plugin function symbol.
     void* create_model_plugin = dlsym(so_handle, "create_model_plugin");
     if(!create_model_plugin)
     {
-        throw std::runtime_error(dlerror());
+        ROS_ERROR_STREAM("failed to get model plugin instantiator (" << dlerror() << ")");
+        return false;
     }
 
     // Get callable version of create_model_plugin.
     std::function<model_plugin_t*()> instantiate = reinterpret_cast<model_plugin_t*(*)()>(create_model_plugin);
 
     // Instantiate the plugin and store it locally.
-    kinematic_model_t::m_model_plugin = instantiate();
-
-    // If this point reached without exception, plugin has loaded successfully.
+    try
+    {
+        kinematic_model_t::m_model_plugin = instantiate();
+    }
+    catch(const std::exception& error)
+    {
+        ROS_ERROR_STREAM("failed to instantiate model plugin (" << error.what() << ")");
+        return false;
+    }
+    
     // Store SO handle.
     kinematic_model_t::m_handle_model_plugin = so_handle;
+
+    return true;
 }
 void kinematic_model_t::unload_model_plugin()
 {
