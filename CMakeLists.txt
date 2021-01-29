@@ -145,6 +145,9 @@ add_executable(${PROJECT_NAME}_node
   src/kinematic_model/geometry/attachment/attachment.cpp
   src/kinematic_model/geometry/attachment/fixed.cpp
   src/kinematic_model/geometry/attachment/dynamic.cpp
+  src/kinematic_model/geometry/graph/graph.cpp
+  src/kinematic_model/geometry/graph/connection.cpp
+  src/kinematic_model/geometry/graph/vertex.cpp
   src/kinematic_model/geometry/design.cpp)
 
 ## Rename C++ executable without prefix
