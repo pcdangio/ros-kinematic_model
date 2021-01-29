@@ -136,6 +136,7 @@ add_executable(${PROJECT_NAME}_node
   src/kinematic_model/main.cpp
   src/kinematic_model/kinematic_model.cpp
   src/kinematic_model/model_plugin.cpp
+  src/kinematic_model/geometry/geometry.cpp
   src/kinematic_model/geometry/transform.cpp
   src/kinematic_model/geometry/pose.cpp
   src/kinematic_model/geometry/object/object.cpp
