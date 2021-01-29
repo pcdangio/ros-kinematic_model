@@ -5,7 +5,8 @@
 using namespace kinematic_model::geometry::object;
 
 joint_t::joint_t(const std::string& name, type_t type, uint32_t state_index)
-    : joint_t::object_t(name, object_t::type_t::JOINT)
+    : joint_t::object_t(name, object_t::type_t::JOINT),
+      joint_t::attachment_t(attachment_t::type_t::DYNAMIC)
 {
     // Store joint type.
     joint_t::m_joint_type = type;
