@@ -1,3 +1,5 @@
+/// \file kinematic_model/geometry/object/link.hpp
+/// \brief Defines the kinematic_model::geometry::object::link_t class.
 #ifndef KINEMATIC_MODEL___GEOMETRY___OBJECT___LINK_H
 #define KINEMATIC_MODEL___GEOMETRY___OBJECT___LINK_H
 
@@ -7,10 +9,14 @@ namespace kinematic_model {
 namespace geometry {
 namespace object {
 
+/// \brief A link object in a kinematic chain.
 class link_t
     : public object_t
 {
 public:
+    // CONSTRUCTORS
+    /// \brief Instantiates a new link object.
+    /// \param name The unique name of the link object.
     link_t(const std::string& name);
 };
 
