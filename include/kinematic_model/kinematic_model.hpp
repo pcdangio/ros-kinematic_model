@@ -2,6 +2,7 @@
 #define KINEMATIC_MODEL___KINEMATIC_MODEL_H
 
 #include <kinematic_model/model_plugin.hpp>
+#include <kinematic_model/geometry/geometry.hpp>
 
 #include <ros/ros.h>
 
@@ -11,7 +12,8 @@ class kinematic_model_t
 {
 public:
     kinematic_model_t();
-    ~kinematic_model_t();
+
+    bool initialize();
 
     void run();
 
@@ -20,10 +22,10 @@ private:
     std::unique_ptr<ros::NodeHandle> m_node;
 
     // MODEL PLUGIN
-    model_plugin_t* m_model_plugin;
-    void* m_handle_model_plugin;
-    bool load_model_plugin();
-    void unload_model_plugin();
+    std::shared_ptr<model_plugin_t> m_model_plugin;
+
+    // COMPONENTS
+    geometry::geometry_t m_geometry;
 };
 
 }

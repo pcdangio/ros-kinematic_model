@@ -8,6 +8,12 @@ int32_t main(int32_t argc, char** argv)
     // Create kinematic_model.
     kinematic_model::kinematic_model_t kinematic_model;
 
-    // Run kinematic_model.
-    kinematic_model.run();
+    // Initialize kinematic model.
+    if(kinematic_model.initialize())
+    {
+        // Run kinematic_model.
+        kinematic_model.run();
+    }
+
+    return 0;
 }
