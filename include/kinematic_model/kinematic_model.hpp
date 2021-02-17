@@ -2,6 +2,7 @@
 #define KINEMATIC_MODEL___KINEMATIC_MODEL_H
 
 #include <kinematic_model/geometry/design.hpp>
+#include <kinematic_model/geometry/graph/graph.hpp>
 
 #include <kalman_filter/ukf.hpp>
 
@@ -19,6 +20,7 @@ public:
     /// \returns A shared pointer to the loaded plugin.
     static std::shared_ptr<kinematic_model_t> load_plugin(const std::string& plugin_path);
 
+    void initialize();
     void run();
 
 protected:
@@ -31,6 +33,8 @@ private:
     // ROS
     std::unique_ptr<ros::NodeHandle> m_node;
 
+    // GEOMETRY
+    geometry::graph::graph_t m_graph;
 };
 
 /// \brief Registers a plugin for loading.

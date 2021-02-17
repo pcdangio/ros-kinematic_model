@@ -55,6 +55,22 @@ std::shared_ptr<kinematic_model_t> kinematic_model_t::load_plugin(const std::str
                                            [so_handle](kinematic_model_t* plugin){delete plugin; dlclose(so_handle);});
 }
 
+void kinematic_model_t::initialize()
+{
+    // First attempt to build geometry design.
+    geometry::design_t design;
+    try
+    {
+        build_geometry(design);
+    }
+    catch(const std::exception& error)
+    {
+        ROS_ERROR_STREAM("plugin::build_geometry failed (" << error.what() << ")");
+    }
+
+    // Build graph.
+    kinematic_model_t::m_graph.build(design);
+}
 void kinematic_model_t::run()
 {
     ros::spin();

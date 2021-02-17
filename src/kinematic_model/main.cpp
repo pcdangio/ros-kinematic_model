@@ -21,6 +21,9 @@ int32_t main(int32_t argc, char** argv)
 
     ROS_INFO_STREAM("loaded kinematic model plugin [" << p_plugin_name << "]");
 
+    // Initialize the plugin.
+    kinematic_model->initialize();
+
     // Run plugin.
     try
     {
