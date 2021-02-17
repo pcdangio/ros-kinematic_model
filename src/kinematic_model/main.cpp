@@ -5,14 +5,29 @@ int32_t main(int32_t argc, char** argv)
     // Initialize ROS.
     ros::init(argc, argv, "kinematic_model");
 
-    // Create kinematic_model.
-    kinematic_model::kinematic_model_t kinematic_model;
+    // Get name of plugin.
+    ros::NodeHandle private_node("~");
+    std::string p_plugin_name = private_node.param<std::string>("plugin_path", "");
 
-    // Initialize kinematic model.
-    if(kinematic_model.initialize())
+    // Load plugin.
+    std::shared_ptr<kinematic_model::kinematic_model_t> kinematic_model = kinematic_model::kinematic_model_t::load_plugin(p_plugin_name);
+
+    // Check if plugin was loaded properly.
+    if(!kinematic_model)
     {
-        // Run kinematic_model.
-        kinematic_model.run();
+        ROS_FATAL_STREAM("failed to start kinematic model");
+        return 1;
+    }
+
+    // Run plugin.
+    try
+    {
+        kinematic_model->run();
+    }
+    catch(const std::exception& error)
+    {
+        ROS_FATAL_STREAM("run failed (" << error.what() << ")");
+        return 1;
     }
 
     return 0;
