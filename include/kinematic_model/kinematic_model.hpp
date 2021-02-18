@@ -9,6 +9,7 @@
 #include <kalman_filter/ukf.hpp>
 
 #include <ros/ros.h>
+#include <kinematic_model_msgs/get_transform.h>
 
 /// \brief Components for implementing the kinematic model.
 namespace kinematic_model {
@@ -43,18 +44,27 @@ protected:
     virtual void build_geometry(geometry::design_t& design) const = 0;
 
 private:
-    // VARIABLES
+    // ROS
     /// \brief The node's private handle.
     std::unique_ptr<ros::NodeHandle> m_node;
-    /// \brief The graph of geometry objects.
-    geometry::graph::graph_t m_graph;
+    
+    // STATE ESTIMATION
     /// \brief The timestamp of the last state estimation.
     ros::Time m_timestamp_state_estimation;
-
-    // METHODS
     /// \brief A timer callback for running the state estimator.
     /// \param event The timed loop event data.
     void timer_state_estimation(const ros::TimerEvent& event);
+
+    // GEOMETRY
+    /// \brief The graph of geometry objects.
+    geometry::graph::graph_t m_graph;
+    /// \brief The service server for the get_transform service.
+    ros::ServiceServer m_service_get_transform;
+    /// \brief A callback for the get_transform service.
+    /// \param request The service request.
+    /// \param response The service response.
+    /// \returns TRUE if the service succeeded, otherwise FALSE.
+    bool service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response);
 };
 
 /// \brief Registers a plugin for loading.

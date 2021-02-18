@@ -12,6 +12,9 @@ kinematic_model_t::kinematic_model_t(uint32_t n_state_variables, uint32_t n_sens
 
     // Initialize delta time.
     kinematic_model_t::dt = 0; 
+
+    // Set up services.
+    kinematic_model_t::m_service_get_transform = kinematic_model_t::m_node->advertiseService("get_transform", &kinematic_model_t::service_get_transform, this);
 }
 std::shared_ptr<kinematic_model_t> kinematic_model_t::load_plugin(const std::string& plugin_path)
 {
@@ -102,6 +105,8 @@ void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
         ROS_FATAL_STREAM("state estimator failed (" << error.what() << ")");
         ros::shutdown();
     }
-
-    ROS_INFO_STREAM(kinematic_model_t::dt);
+}
+bool kinematic_model_t::service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response)
+{
+    return true;
 }
