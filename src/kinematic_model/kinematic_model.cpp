@@ -8,10 +8,7 @@ kinematic_model_t::kinematic_model_t(uint32_t n_state_variables, uint32_t n_sens
     : ukf_t(n_state_variables, n_sensors)
 {
     // Set up private node handle.
-    kinematic_model_t::m_node = std::make_unique<ros::NodeHandle>("~");
-
-    // Load parameters.
-    kinematic_model_t::p_state_estimation_rate = kinematic_model_t::m_node->param<double_t>("state_estimation_rate", 100);
+    kinematic_model_t::m_node = std::make_unique<ros::NodeHandle>("~"); 
 }
 std::shared_ptr<kinematic_model_t> kinematic_model_t::load_plugin(const std::string& plugin_path)
 {
@@ -76,5 +73,26 @@ void kinematic_model_t::initialize()
 }
 void kinematic_model_t::run()
 {
+    // Create loop timer for state estimator.
+    auto p_loop_rate = kinematic_model_t::m_node->param<double_t>("state_estimation_rate", 100);
+    auto loop_timer = kinematic_model_t::m_node->createTimer(ros::Duration(1.0/p_loop_rate), &kinematic_model_t::timer_state_estimator, this);
+
+    // Spin node.
     ros::spin();
+}
+void kinematic_model_t::timer_state_estimator(const ros::TimerEvent& event)
+{
+    // Calculate current delta time for this iteration.
+    kinematic_model_t::m_dt = (event.current_real - event.last_real).toSec();
+
+    // Run iteration for state estimator.
+    try
+    {
+        kinematic_model_t::iterate();
+    }
+    catch(const std::exception& error)
+    {
+        ROS_FATAL_STREAM("state estimator failed (" << error.what() << ")");
+        ros::shutdown();
+    }
 }

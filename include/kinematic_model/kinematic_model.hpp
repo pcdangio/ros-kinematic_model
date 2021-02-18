@@ -29,6 +29,8 @@ protected:
     /// \details This method is where plugins shall specify links, joints, and frames.
     virtual void build_geometry(geometry::design_t& design) const = 0;
 
+    double_t dt() const;
+
 private:
     // ROS
     std::unique_ptr<ros::NodeHandle> m_node;
@@ -36,8 +38,9 @@ private:
     // GEOMETRY
     geometry::graph::graph_t m_graph;
 
-    // PARAMETERS
-    double_t p_state_estimation_rate;
+    void timer_state_estimator(const ros::TimerEvent& event);
+
+    double_t m_dt;
 };
 
 /// \brief Registers a plugin for loading.
