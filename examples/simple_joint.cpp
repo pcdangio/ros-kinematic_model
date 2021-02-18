@@ -9,7 +9,9 @@ public:
     simple_joint_t()
         : kinematic_model_t(1, 1)
     {
-
+        // Initialize state estimation parameters.
+        simple_joint_t::Q(0,0) = 0.0001;
+        simple_joint_t::R(0,0) = 0.01;
     }
 private:
     void build_geometry(geometry::design_t& design) const override
