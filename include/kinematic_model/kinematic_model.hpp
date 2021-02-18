@@ -35,6 +35,9 @@ private:
 
     // GEOMETRY
     geometry::graph::graph_t m_graph;
+
+    // PARAMETERS
+    double_t p_state_estimation_rate;
 };
 
 /// \brief Registers a plugin for loading.

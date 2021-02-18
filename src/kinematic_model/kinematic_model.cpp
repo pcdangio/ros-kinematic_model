@@ -9,6 +9,9 @@ kinematic_model_t::kinematic_model_t(uint32_t n_state_variables, uint32_t n_sens
 {
     // Set up private node handle.
     kinematic_model_t::m_node = std::make_unique<ros::NodeHandle>("~");
+
+    // Load parameters.
+    kinematic_model_t::p_state_estimation_rate = kinematic_model_t::m_node->param<double_t>("state_estimation_rate", 100);
 }
 std::shared_ptr<kinematic_model_t> kinematic_model_t::load_plugin(const std::string& plugin_path)
 {
