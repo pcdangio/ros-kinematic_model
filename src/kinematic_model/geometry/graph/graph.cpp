@@ -72,6 +72,9 @@ void graph_t::build(const design_t& model_design)
 }
 void graph_t::clear()
 {
+    // Clear the path cache.
+    graph_t::m_path_cache.clear();
+
     // Iterate through map and delete vertex pointers.
     for(auto vertex_entry = graph_t::m_vertices.begin(); vertex_entry != graph_t::m_vertices.end(); ++vertex_entry)
     {
@@ -83,6 +86,17 @@ void graph_t::clear()
 }
 std::shared_ptr<path_t> graph_t::solve_path(const std::string& source_object, const std::string& destination_object) const
 {
+    // Check the path cache to see if this path has already been solved.
+    std::string cache_key = source_object + ":" + destination_object;
+    auto path_cache_iterator = graph_t::m_path_cache.find(cache_key);
+    if(path_cache_iterator != graph_t::m_path_cache.end())
+    {
+        // Return the cached solved path.
+        return path_cache_iterator->second;
+    }
+
+    // If this point reached, path must be solved.
+
     // Get pointer to source vertex.
     auto source_vertex_iterator = graph_t::m_vertices.find(source_object);
     if(source_vertex_iterator == graph_t::m_vertices.end())
@@ -111,6 +125,9 @@ std::shared_ptr<path_t> graph_t::solve_path(const std::string& source_object, co
     // Start recursion from source vertex.
     current_visited.push_back(source_vertex->id);
     graph_t::solve_path(source_vertex, destination_vertex->id, current_visited, current_path, solved_path);
+
+    // Add solved path to the cache.
+    graph_t::m_path_cache[cache_key] = solved_path;
 
     // Return solved path.
     return solved_path;

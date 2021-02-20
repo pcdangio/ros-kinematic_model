@@ -33,13 +33,16 @@ public:
     /// \param destination_object The name of the object to find a path to.
     /// \returns The solved path from source to destination.
     /// Returns NULLPTR if source and/or destination don't exist, or the path could not be found.
+    /// \details This method uses internal path caching for efficiency.
     std::shared_ptr<path_t> solve_path(const std::string& source_object, const std::string& destination_object) const;
 
 private:
     // VARIABLES
     /// \brief Contains the graph vertices and aligns them to unique object names.
     std::unordered_map<std::string, vertex_t*> m_vertices;
-
+    /// \brief Caches calculated paths.
+    mutable std::unordered_map<std::string, std::shared_ptr<path_t>> m_path_cache;
+    
     // METHODS
     /// \brief A recursive method implementing a depth-first search through the graph.
     /// \param vertex The current vertex to scan.
