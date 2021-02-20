@@ -88,6 +88,14 @@ void kinematic_model_t::run()
     // Spin node.
     ros::spin();
 }
+
+// PROTECTED METHODS
+bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, geometry::transform_t& transform)
+{
+
+}
+
+// ROS CALLBACKS
 void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
 {
     // Calculate current delta time for this iteration.
@@ -108,5 +116,6 @@ void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
 }
 bool kinematic_model_t::service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response)
 {
+    
     return true;
 }

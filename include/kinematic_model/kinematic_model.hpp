@@ -42,6 +42,13 @@ protected:
     /// \param design The design object for adding instructions to.
     /// \details This method is where plugins shall specify links, joints, and frames.
     virtual void build_geometry(geometry::design_t& design) const = 0;
+    /// \brief Gets a transform between two frames.
+    /// \param source_frame The desired source frame of the transform.
+    /// \param target_frame The desired target frame of the transform.
+    /// \param transform OUTPUT The calculated transform.
+    /// \returns TRUE if the transform was able to be calculated, otherwise FALSE.
+    /// \note This method uses the state estimation cache.
+    bool get_transform(const std::string& source_frame, const std::string& target_frame, geometry::transform_t& transform);
 
 private:
     // ROS
@@ -64,6 +71,7 @@ private:
     /// \param request The service request.
     /// \param response The service response.
     /// \returns TRUE if the service succeeded, otherwise FALSE.
+    /// \note This method uses the transform service cache.
     bool service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response);
 };
 
