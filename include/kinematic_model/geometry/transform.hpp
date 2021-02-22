@@ -20,6 +20,9 @@ public:
     void transform(pose_t& pose) const;
 
     transform_t inverse() const;
+
+    const Eigen::Vector3d& translation() const;
+    const Eigen::Quaterniond& rotation() const;
     
 private:
     Eigen::Vector3d m_translation;

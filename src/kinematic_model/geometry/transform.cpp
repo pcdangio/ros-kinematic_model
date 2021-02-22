@@ -61,3 +61,12 @@ transform_t transform_t::inverse() const
 
     return inverted;
 }
+
+const Eigen::Vector3d& transform_t::translation() const
+{
+    return transform_t::m_translation;
+}
+const Eigen::Quaterniond& transform_t::rotation() const
+{
+    return transform_t::m_rotation;
+}
