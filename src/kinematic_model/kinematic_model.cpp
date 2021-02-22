@@ -113,9 +113,63 @@ void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
         ROS_FATAL_STREAM("state estimator failed (" << error.what() << ")");
         ros::shutdown();
     }
+
+    // Reset the transform cache.
+    kinematic_model_t::m_transform_cache.clear();
 }
 bool kinematic_model_t::service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response)
 {
-    
-    return true;
+    // Create an output transform (defaults to identity).
+    geometry::transform_t transform;
+
+    // Create flag for tracking success of transform retrieval.
+    bool success = false;
+
+    // Check the transform cache.
+    std::string cache_key = request.source_frame + ":" + request.target_frame;
+    auto cache_iterator = kinematic_model_t::m_transform_cache.find(cache_key);
+    if(cache_iterator != kinematic_model_t::m_transform_cache.end())
+    {
+        // Transform found in cache.
+
+        // Read transform from cache.
+        transform = cache_iterator->second;
+
+        // Flag successful transform.
+        success = true;
+    }
+    else
+    {
+        // Transform not found in cache.
+
+        // Calculate the transform.
+        if(kinematic_model_t::get_transform(request.source_frame, request.target_frame, transform))
+        {
+            // Transform successfully calculated.
+
+            // NOTE: transform stored in output via function.
+
+            // Flag successful transform.
+            success = true;
+
+            // Add transform forward/reverse to cache.
+            std::string cache_key_reverse = request.target_frame + ":" + request.source_frame;
+            kinematic_model_t::m_transform_cache[cache_key] = transform;
+            kinematic_model_t::m_transform_cache[cache_key_reverse] = transform.inverse();
+        }
+    }
+
+    // Set up response.
+    auto& translation = transform.translation();
+    response.transform.x = translation.x();
+    response.transform.y = translation.y();
+    response.transform.z = translation.z();
+    auto& rotation = transform.rotation();
+    response.transform.qw = rotation.w();
+    response.transform.qx = rotation.x();
+    response.transform.qy = rotation.y();
+    response.transform.qz = rotation.z();
+
+    // Indicate if transform calculation was a success.
+    return success;
 }
