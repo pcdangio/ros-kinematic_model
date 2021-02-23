@@ -92,7 +92,33 @@ void kinematic_model_t::run()
 // PROTECTED METHODS
 bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, geometry::transform_t& transform)
 {
+    // Get the transform path from the graph.
+    // NOTE: graph internally uses caching on path solving.
+    auto path = kinematic_model_t::m_graph.solve_path(source_frame, target_frame);
 
+    // Check if path was found.
+    if(!path)
+    {
+        return false;
+    }
+
+    // Iterate through the solved path.
+    for(auto connection = path->cbegin(); connection != path->cend(); ++connection)
+    {
+        // Get the transform from the connection's attachment using the current state.
+        auto attachment_transform = connection->attachment->get_transform(kinematic_model_t::x);
+
+        // Invert the transform if needed.
+        if(connection->direction == geometry::graph::connection_t::direction_t::CHILD_PARENT)
+        {
+            attachment_transform.invert();
+        }
+
+        // Chain the transform.
+        attachment_transform.transform(transform);
+    }
+
+    return true;
 }
 
 // ROS CALLBACKS
