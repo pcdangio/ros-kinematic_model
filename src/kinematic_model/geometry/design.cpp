@@ -18,7 +18,7 @@ std::shared_ptr<object::joint_t> design_t::create_joint(const std::string& name,
     return std::make_shared<object::joint_t>(name, type, state_index);
 }
 
-// ADDING
+// ADDITION
 bool design_t::add_object(const std::shared_ptr<object::object_t>& object)
 {
     // Call base add_object() with empty parent/attachment.
@@ -108,6 +108,7 @@ bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const
     return true;
 }
 
+// ACCESS
 std::vector<design_t::instruction_t> design_t::instructions() const
 {
     return design_t::m_instructions;
