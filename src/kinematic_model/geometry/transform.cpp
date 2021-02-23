@@ -24,18 +24,7 @@ transform_t::transform_t(const Eigen::Quaterniond& rotation)
     transform_t::m_rotation = rotation;
 }
 
-// APPLICATIONS
-void transform_t::transform(transform_t& transform) const
-{
-    // Apply this transform's rotation to the original transform.
-    transform.m_rotation = transform_t::m_rotation * transform.m_rotation;
-    transform.m_translation = transform_t::m_rotation * transform.m_translation;
-    // Normalize the transformed rotation for numerical stability.
-    transform.m_rotation.normalize();
-
-    // Add this transform's translation to the now rotated original translation.
-    transform.m_translation += transform_t::m_translation;
-}
+// MODIFIERS
 transform_t transform_t::inverse() const
 {
     // Create output transform.
@@ -51,6 +40,20 @@ transform_t transform_t::inverse() const
     return inverted;
 }
 
+// APPLICATIONS
+void transform_t::transform(transform_t& transform) const
+{
+    // Apply this transform's rotation to the original transform.
+    transform.m_rotation = transform_t::m_rotation * transform.m_rotation;
+    transform.m_translation = transform_t::m_rotation * transform.m_translation;
+    // Normalize the transformed rotation for numerical stability.
+    transform.m_rotation.normalize();
+
+    // Add this transform's translation to the now rotated original translation.
+    transform.m_translation += transform_t::m_translation;
+}
+
+// ACCESS
 const Eigen::Vector3d& transform_t::translation() const
 {
     return transform_t::m_translation;
