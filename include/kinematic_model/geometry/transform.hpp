@@ -1,8 +1,6 @@
 #ifndef KINEMATIC_MODEL___GEOMETRY___TRANSFORM_H
 #define KINEMATIC_MODEL___GEOMETRY___TRANSFORM_H
 
-#include <kinematic_model/geometry/pose.hpp>
-
 #include <eigen3/Eigen/Dense>
 
 namespace kinematic_model {
@@ -23,7 +21,6 @@ public:
 
     // APPLICATIONS
     void transform(transform_t& transform) const;
-    void transform(pose_t& pose) const;
 
     const Eigen::Vector3d& translation() const;
     const Eigen::Quaterniond& rotation() const;

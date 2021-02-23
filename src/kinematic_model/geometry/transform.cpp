@@ -51,17 +51,6 @@ void transform_t::transform(transform_t& transform) const
     // Add this transform's translation to the now rotated original translation.
     transform.m_translation += transform_t::m_translation;
 }
-void transform_t::transform(pose_t& pose) const
-{
-    // Rotate the original pose.
-    pose.m_orientation = transform_t::m_rotation * pose.m_orientation;
-    pose.m_position = transform_t::m_rotation * pose.m_position;
-    // Normalize the rotated orientation for numerical stability.
-    pose.m_orientation.normalize();
-
-    // Translate the rotated pose.
-    pose.m_position += transform_t::m_translation;
-}
 transform_t transform_t::inverse() const
 {
     // Create output transform.

@@ -124,7 +124,6 @@ include_directories(
 add_library(${PROJECT_NAME}
   src/kinematic_model/kinematic_model.cpp
   src/kinematic_model/geometry/transform.cpp
-  src/kinematic_model/geometry/pose.cpp
   src/kinematic_model/geometry/object/object.cpp
   src/kinematic_model/geometry/object/link.cpp
   src/kinematic_model/geometry/object/frame.cpp
