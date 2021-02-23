@@ -117,7 +117,7 @@ bool kinematic_model_t::get_transform(const std::string& source_frame, const std
         // Invert the transform if needed.
         if(connection->direction == geometry::graph::connection_t::direction_t::CHILD_PARENT)
         {
-            attachment_transform.invert();
+            attachment_transform = attachment_transform.inverse();
         }
 
         // Chain the transform.

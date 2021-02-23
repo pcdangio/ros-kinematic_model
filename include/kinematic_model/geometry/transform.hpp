@@ -15,8 +15,6 @@ public:
     transform_t(const Eigen::Quaterniond& rotation);
 
     // MODIFIERS
-    void reset();
-    void invert();
     transform_t inverse() const;
 
     // APPLICATIONS
