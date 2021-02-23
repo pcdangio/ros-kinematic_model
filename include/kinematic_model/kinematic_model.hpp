@@ -21,6 +21,9 @@ class kinematic_model_t
 {
 public:
     // CONSTRUCTORS
+    /// \brief Instantiates a new kinematic_model object.
+    /// \param n_state_variables The number of variables in the model's state vector.
+    /// \param n_sensors The number of sensors providing observations to the model's state.
     kinematic_model_t(uint32_t n_state_variables, uint32_t n_sensors);
     /// \brief Loads and instantiates a kinematic model plugin.
     /// \param plugin_path The path to the plugin's *.so shared object library.

@@ -6,9 +6,10 @@
 #include <eigen3/Eigen/Dense>
 
 namespace kinematic_model {
+/// \brief Geometric objects and tools for modeling the kinematics of a system.
 namespace geometry {
 
-// Represents a 3D transformation between coordinate frames.
+/// \brief Represents a 3D transformation between coordinate frames.
 class transform_t
 {
 public:

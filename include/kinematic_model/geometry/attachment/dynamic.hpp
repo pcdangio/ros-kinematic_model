@@ -1,4 +1,4 @@
-/// \file kinematic_modle/geometry/attachment/dynamic.hpp
+/// \file kinematic_model/geometry/attachment/dynamic.hpp
 /// \brief Defines the kinematic_model::geometry::attachment::dynamic_t class.
 #ifndef KINEMATIC_MODEL___GEOMETRY___ATTACHMENT___DYNAMIC_H
 #define KINEMATIC_MODEL___GEOMETRY___ATTACHMENT___DYNAMIC_H
