@@ -16,10 +16,14 @@ public:
     transform_t(const Eigen::Vector3d& translation);
     transform_t(const Eigen::Quaterniond& rotation);
 
+    // MODIFIERS
+    void reset();
+    void invert();
+    transform_t inverse() const;
+
+    // APPLICATIONS
     void transform(transform_t& transform) const;
     void transform(pose_t& pose) const;
-
-    transform_t inverse() const;
 
     const Eigen::Vector3d& translation() const;
     const Eigen::Quaterniond& rotation() const;
