@@ -4,6 +4,7 @@
 
 using namespace kinematic_model;
 
+// CONSTRUCTORS
 kinematic_model_t::kinematic_model_t(uint32_t n_state_variables, uint32_t n_sensors)
     : ukf_t(n_state_variables, n_sensors)
 {
@@ -61,6 +62,7 @@ std::shared_ptr<kinematic_model_t> kinematic_model_t::load_plugin(const std::str
                                            [so_handle](kinematic_model_t* plugin){delete plugin; dlclose(so_handle);});
 }
 
+// METHODS
 void kinematic_model_t::initialize()
 {
     // First attempt to build geometry design.

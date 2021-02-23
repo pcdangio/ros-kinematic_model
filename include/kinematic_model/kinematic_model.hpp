@@ -9,6 +9,7 @@
 #include <kalman_filter/ukf.hpp>
 
 #include <ros/ros.h>
+
 #include <kinematic_model_msgs/get_transform.h>
 
 /// \brief Components for implementing the kinematic model.
@@ -43,7 +44,7 @@ protected:
     /// \details This method is where plugins shall specify links, joints, and frames.
     virtual void build_geometry(geometry::design_t& design) const = 0;
     /// \brief This method is called internally each time the model's state is updated.
-    /// \details User plugins may override this method to have their own code called each time a new state is calculated.
+    /// \details User plugins may optionally override this method to have their own code called each time a new state is calculated.
     virtual void on_state_update();
     /// \brief Gets a transform between two frames.
     /// \param source_frame The desired source frame of the transform.
