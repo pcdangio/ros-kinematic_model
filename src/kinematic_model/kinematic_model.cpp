@@ -90,6 +90,10 @@ void kinematic_model_t::run()
 }
 
 // PROTECTED METHODS
+void kinematic_model_t::on_state_update()
+{
+    // Do nothing; this is an optional base class space holder.
+}
 bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, geometry::transform_t& transform)
 {
     // Get the transform path from the graph.
@@ -142,6 +146,9 @@ void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
 
     // Reset the transform cache.
     kinematic_model_t::m_transform_cache.clear();
+
+    // Call user code.
+    on_state_update();
 }
 bool kinematic_model_t::service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response)
 {
