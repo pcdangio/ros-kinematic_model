@@ -152,7 +152,7 @@ void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
     // Call user code.
     on_state_update();
 }
-bool kinematic_model_t::service_get_transform(kinematic_model_msgs::get_transformRequest& request, kinematic_model_msgs::get_transformResponse& response)
+bool kinematic_model_t::service_get_transform(transform_msgs::get_transformRequest& request, transform_msgs::get_transformResponse& response)
 {
     // Create an output transform (defaults to identity).
     geometry::transform_t transform;
