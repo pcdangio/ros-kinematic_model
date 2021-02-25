@@ -32,7 +32,7 @@ bool joint_t::set_axis_definition(double x, double y, double z)
 
     return false;
 }
-kinematic_model::geometry::transform_t joint_t::get_transform(const Eigen::VectorXd& state_vector) const
+transform::transform_t joint_t::get_transform(const Eigen::VectorXd& state_vector) const
 {
     // Calculate transform from joint parent frame to child frame.
 
@@ -47,7 +47,7 @@ kinematic_model::geometry::transform_t joint_t::get_transform(const Eigen::Vecto
             rotation = Eigen::AngleAxisd(angle, joint_t::m_axis_definition);
 
             // Create and return transform using rotation.
-            return transform_t(rotation);
+            return transform::transform_t(rotation);
         }
         case joint_t::type_t::PRISMATIC:
         {
@@ -56,7 +56,7 @@ kinematic_model::geometry::transform_t joint_t::get_transform(const Eigen::Vecto
             Eigen::Vector3d translation = joint_t::m_axis_definition * distance;
 
             // Create and return transform using translation.
-            return transform_t(translation);
+            return transform::transform_t(translation);
         }
     }
 }

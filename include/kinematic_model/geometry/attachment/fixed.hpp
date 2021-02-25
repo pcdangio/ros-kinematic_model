@@ -26,12 +26,12 @@ public:
     fixed_t(double x, double y, double z, double qw, double qx, double qy, double qz);
     
     // METHODS
-    transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
+    transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
 private:
     // VARIABLES
     /// \brief The fixed parent->child transform of the attachment.
-    transform_t m_transform;
+    transform::transform_t m_transform;
 };
 
 }}}
