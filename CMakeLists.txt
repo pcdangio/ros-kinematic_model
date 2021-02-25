@@ -33,10 +33,12 @@ add_library(${PROJECT_NAME}
   src/kinematic_model/geometry/graph/connection.cpp
   src/kinematic_model/geometry/graph/vertex.cpp
   src/kinematic_model/geometry/design.cpp)
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 
 # Add kinematic_model node executable.
 add_executable(${PROJECT_NAME}_node src/kinematic_model/main.cpp)
 set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+add_dependencies(${PROJECT_NAME}_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(${PROJECT_NAME}_node
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
