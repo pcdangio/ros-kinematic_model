@@ -411,6 +411,9 @@ include_directories(
 
 # Add your plugin as a shared library.
 add_library(my_custom_plugin MODULE src/my_plugin.cpp)
+
+# Ensure all custom ROS msg/srv dependencies are built first.
+add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 ```
 
 Building your package will result in a `libmy_custom_plugin.so` library being built. This is what the kinematic_model node will eventually load and run.
