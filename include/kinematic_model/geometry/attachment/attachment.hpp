@@ -3,7 +3,7 @@
 #ifndef KINEMATIC_MODEL___GEOMETRY___ATTACHMENT___ATTACHMENT_H
 #define KINEMATIC_MODEL___GEOMETRY___ATTACHMENT___ATTACHMENT_H
 
-#include <kinematic_model/geometry/transform.hpp>
+#include <transform/transform.hpp>
 
 namespace kinematic_model {
 namespace geometry {
@@ -26,7 +26,7 @@ public:
     /// \brief Gets the parent-to-child transform between the two attached objects.
     /// \param state_vector The current state vector to evaluate the transform with.
     /// \returns The parent-to-child transform.
-    virtual transform_t get_transform(const Eigen::VectorXd& state_vector) const = 0;
+    virtual transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const = 0;
 
     // PROPERTIES
     /// \brief Gets the attachment's type.

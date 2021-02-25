@@ -19,7 +19,7 @@ dynamic_t::dynamic_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t st
 }
 
 // METHODS
-kinematic_model::geometry::transform_t dynamic_t::get_transform(const Eigen::VectorXd& state_vector) const
+transform::transform_t dynamic_t::get_transform(const Eigen::VectorXd& state_vector) const
 {
     // Create position vector.
     Eigen::Vector3d position;
@@ -35,5 +35,5 @@ kinematic_model::geometry::transform_t dynamic_t::get_transform(const Eigen::Vec
     orientation.z() = state_vector[dynamic_t::m_state_index_qz];
 
     // Create and return transform.
-    return transform_t(position, orientation);
+    return transform::transform_t(position, orientation);
 }

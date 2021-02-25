@@ -55,7 +55,7 @@ protected:
     /// \param transform OUTPUT The calculated transform.
     /// \returns TRUE if the transform was able to be calculated, otherwise FALSE.
     /// \note This method uses the state estimation cache.
-    bool get_transform(const std::string& source_frame, const std::string& target_frame, geometry::transform_t& transform);
+    bool get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform);
 
 private:
     // ROS
@@ -73,7 +73,7 @@ private:
     /// \brief The graph of geometry objects.
     geometry::graph::graph_t m_graph;
     /// \brief A cache of calculated transforms for the get_transform service.
-    std::unordered_map<std::string, geometry::transform_t> m_transform_cache;
+    std::unordered_map<std::string, transform::transform_t> m_transform_cache;
     /// \brief The service server for the get_transform service.
     ros::ServiceServer m_service_get_transform;
     /// \brief A callback for the get_transform service.

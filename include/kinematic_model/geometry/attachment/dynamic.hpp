@@ -26,7 +26,7 @@ public:
     dynamic_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz);
 
     // METHODS
-    transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
+    transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
 private:
     // VARIABLES

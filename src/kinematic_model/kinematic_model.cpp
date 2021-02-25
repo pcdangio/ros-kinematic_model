@@ -96,7 +96,7 @@ void kinematic_model_t::on_state_update()
 {
     // Do nothing; this is an optional base class space holder.
 }
-bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, geometry::transform_t& transform)
+bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform)
 {
     // Get the transform path from the graph.
     // NOTE: graph internally uses caching on path solving.
@@ -155,7 +155,7 @@ void kinematic_model_t::timer_state_estimation(const ros::TimerEvent& event)
 bool kinematic_model_t::service_get_transform(transform_msgs::get_transformRequest& request, transform_msgs::get_transformResponse& response)
 {
     // Create an output transform (defaults to identity).
-    geometry::transform_t transform;
+    transform::transform_t transform;
 
     // Create flag for tracking success of transform retrieval.
     bool success = false;

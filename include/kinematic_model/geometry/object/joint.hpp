@@ -39,7 +39,7 @@ public:
     /// \returns TRUE if the axis was updated, otherwise FALSE if the joint is locked against editing.
     /// \note The unit vector definging the axis should have a magnitude of 1.
     bool set_axis_definition(double x, double y, double z);
-    transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
+    transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
     // PROPERTIES
     /// \brief Gets the joint's type.
