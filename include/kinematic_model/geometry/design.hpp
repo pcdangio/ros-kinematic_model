@@ -14,6 +14,7 @@
 #include <memory>
 
 namespace kinematic_model {
+/// \brief Geometric objects and tools for modeling the kinematics of a system.
 namespace geometry {
 
 /// \brief An tool for specifying the geometric design of a model.
