@@ -55,7 +55,7 @@ protected:
     /// \param transform OUTPUT The calculated transform.
     /// \returns TRUE if the transform was able to be calculated, otherwise FALSE.
     /// \note This method uses the state estimation cache.
-    bool get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform);
+    bool get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform) const;
 
 private:
     // ROS

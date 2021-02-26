@@ -96,7 +96,7 @@ void kinematic_model_t::on_state_update()
 {
     // Do nothing; this is an optional base class space holder.
 }
-bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform)
+bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform) const
 {
     // Get the transform path from the graph.
     // NOTE: graph internally uses caching on path solving.
