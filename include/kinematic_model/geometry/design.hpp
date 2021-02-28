@@ -60,9 +60,9 @@ public:
     /// \param x The fixed x position of the object's frame relative to the parent's frame.
     /// \param y The fixed y position of the object's frame relative to the parent's frame.
     /// \param z The fixed z position of the object's frame relative to the parent's frame.
-    /// \param roll The fixed roll (x) angle of the object's frame relative to the parent's frame.
-    /// \param pitch The fixed pitch (y) angle of the object's frame relative to the parent's frame.
-    /// \param yaw The fixed yaw (z) angle of the object's frame relative to the parent's frame.
+    /// \param roll The fixed roll (x) angle, in radians, of the object's frame relative to the parent's frame.
+    /// \param pitch The fixed pitch (y) angle, in radians, of the object's frame relative to the parent's frame.
+    /// \param yaw The fixed yaw (z) angle, in radians, of the object's frame relative to the parent's frame.
     /// \returns TRUE if the object was added successfully, otherwise FALSE.
     bool add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, double x, double y, double z, double roll, double pitch, double yaw);
     /// \brief Adds an object to the design with a dynamic attachment to a parent.
