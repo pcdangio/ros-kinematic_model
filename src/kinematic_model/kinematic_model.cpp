@@ -96,7 +96,7 @@ void kinematic_model_t::on_state_update()
 {
     // Do nothing; this is an optional base class space holder.
 }
-bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform) const
+bool kinematic_model_t::get_transform(const std::string& source_frame, const std::string& target_frame, const Eigen::VectorXd& state_vector, transform::transform_t& transform) const
 {
     // Get the transform path from the graph.
     // NOTE: graph internally uses caching on path solving.
@@ -112,7 +112,7 @@ bool kinematic_model_t::get_transform(const std::string& source_frame, const std
     for(auto connection = path->cbegin(); connection != path->cend(); ++connection)
     {
         // Get the transform from the connection's attachment using the current state.
-        auto attachment_transform = connection->attachment->get_transform(kinematic_model_t::x);
+        auto attachment_transform = connection->attachment->get_transform(state_vector);
 
         // Invert the transform if needed.
         if(connection->direction == geometry::graph::connection_t::direction_t::CHILD_PARENT)
@@ -177,8 +177,8 @@ bool kinematic_model_t::service_get_transform(transform_msgs::get_transformReque
     {
         // Transform not found in cache.
 
-        // Calculate the transform.
-        if(kinematic_model_t::get_transform(request.source_frame, request.target_frame, transform))
+        // Calculate the transform with current state.
+        if(kinematic_model_t::get_transform(request.source_frame, request.target_frame, kinematic_model_t::x, transform))
         {
             // Transform successfully calculated.
 

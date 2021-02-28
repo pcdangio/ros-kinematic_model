@@ -52,10 +52,11 @@ protected:
     /// \brief Gets a transform between two frames.
     /// \param source_frame The desired source frame of the transform.
     /// \param target_frame The desired target frame of the transform.
+    /// \param state_vector The state vector to base transforms on.
     /// \param transform OUTPUT The calculated transform.
     /// \returns TRUE if the transform was able to be calculated, otherwise FALSE.
     /// \note This method uses the state estimation cache.
-    bool get_transform(const std::string& source_frame, const std::string& target_frame, transform::transform_t& transform) const;
+    bool get_transform(const std::string& source_frame, const std::string& target_frame, const Eigen::VectorXd& state_vector, transform::transform_t& transform) const;
 
 private:
     // ROS
