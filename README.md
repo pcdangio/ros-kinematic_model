@@ -143,7 +143,7 @@ This section provides instructions for downloading kinematic_model and compiling
 
 - [kalman_filter](https://github.com/pcdangio/ros-kalman_filter): A ROS package providing c++ libraries for Kalman Filtering.
 - [transform](https://github.com/pcdangio/ros-transform): A ROS package providing c++ libraries for geometric transforms.
-- [transform_msgs](https://github.com/pcdangio/ros-transform_msgs): ROS messages and services for geometric transforms.
+- [geometry_msgs_ext](https://github.com/pcdangio/ros-geometry_msgs_ext): ROS messages and services for geometric information.
 - [Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page): A c++ library used for matrix/vector calculations (included in ROS).
 
 **Download & Build**
@@ -160,7 +160,7 @@ source /opt/ros/melodic/setup.bash
 # Clone dependencies into src/ if you haven't already
 git clone https://github.com/pcdangio/ros-kalman_filter.git src/kalman_filter
 git clone https://github.com/pcdangio/ros-transform.git src/transform
-git clone https://github.com/pcdangio/ros-transform_msgs.git src/transform_msgs
+git clone https://github.com/pcdangio/ros-geometry_msgs_ext.git src/geometry_msgs_ext
 
 # Clone the kinematic_model package into src/
 git clone https://github.com/pcdangio/ros-kinematic_model.git src/kinematic_model

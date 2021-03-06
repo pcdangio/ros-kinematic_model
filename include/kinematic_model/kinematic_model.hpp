@@ -10,7 +10,7 @@
 
 #include <ros/ros.h>
 
-#include <transform_msgs/get_transform.h>
+#include <geometry_msgs_ext/get_transform.h>
 
 /// \brief Components for implementing the kinematic model.
 namespace kinematic_model {
@@ -82,7 +82,7 @@ private:
     /// \param response The service response.
     /// \returns TRUE if the service succeeded, otherwise FALSE.
     /// \note This method uses the transform service cache.
-    bool service_get_transform(transform_msgs::get_transformRequest& request, transform_msgs::get_transformResponse& response);
+    bool service_get_transform(geometry_msgs_ext::get_transformRequest& request, geometry_msgs_ext::get_transformResponse& response);
 };
 
 /// \brief Registers a plugin for loading.

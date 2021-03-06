@@ -5,14 +5,13 @@ project(kinematic_model)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   kalman_filter
-  transform_msgs
   transform)
 
 # Build catkin package.
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES kinematic_model
-  CATKIN_DEPENDS roscpp kalman_filter transform_msgs transform)
+  CATKIN_DEPENDS roscpp kalman_filter transform)
 
 # Set up include directories.
 include_directories(
