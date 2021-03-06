@@ -195,15 +195,7 @@ bool kinematic_model_t::service_get_transform(geometry_msgs_ext::get_transformRe
     }
 
     // Set up response.
-    auto& translation = transform.translation();
-    response.transform.x = translation.x();
-    response.transform.y = translation.y();
-    response.transform.z = translation.z();
-    auto& rotation = transform.rotation();
-    response.transform.qw = rotation.w();
-    response.transform.qx = rotation.x();
-    response.transform.qy = rotation.y();
-    response.transform.qz = rotation.z();
+    response.transform = transform.to_message();
 
     // Indicate if transform calculation was a success.
     return success;
