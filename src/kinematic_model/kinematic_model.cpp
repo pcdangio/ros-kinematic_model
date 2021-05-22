@@ -178,7 +178,7 @@ bool kinematic_model_t::service_get_transform(geometry_msgs_ext::get_transformRe
         // Transform not found in cache.
 
         // Calculate the transform with current state.
-        if(kinematic_model_t::get_transform(request.source_frame, request.target_frame, kinematic_model_t::x, transform))
+        if(kinematic_model_t::get_transform(request.source_frame, request.target_frame, kinematic_model_t::state(), transform))
         {
             // Transform successfully calculated.
 
