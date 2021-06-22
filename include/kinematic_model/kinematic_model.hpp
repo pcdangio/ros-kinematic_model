@@ -32,7 +32,8 @@ public:
 
     // METHODS
     /// \brief Initializes the kinematic model for operation.
-    void initialize();
+    /// \returns TRUE if initialization succeeded, otherwise FALSE.
+    bool initialize();
     /// \brief Runs the kinematic model.
     void run();
 
