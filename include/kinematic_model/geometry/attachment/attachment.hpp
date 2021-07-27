@@ -23,9 +23,9 @@ public:
     };
 
     // METHODS
-    /// \brief Gets the parent-to-child transform between the two attached objects.
+    /// \brief Gets the child-to-parent transform between the two attached objects.
     /// \param state_vector The current state vector to evaluate the transform with.
-    /// \returns The parent-to-child transform.
+    /// \returns The child-to-parent transform.
     virtual transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const = 0;
 
     // PROPERTIES

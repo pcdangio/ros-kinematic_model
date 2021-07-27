@@ -30,7 +30,7 @@ public:
 
 private:
     // VARIABLES
-    /// \brief The fixed parent->child transform of the attachment.
+    /// \brief The fixed child->parent transform of the attachment.
     transform::transform_t m_transform;
 };
 
