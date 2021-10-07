@@ -7,8 +7,7 @@
 #include <kinematic_model/geometry/object/frame.hpp>
 #include <kinematic_model/geometry/object/joint.hpp>
 
-#include <kinematic_model/geometry/attachment/fixed.hpp>
-#include <kinematic_model/geometry/attachment/dynamic.hpp>
+#include <kinematic_model/geometry/attachment/attachment.hpp>
 
 #include <vector>
 #include <memory>
@@ -49,34 +48,42 @@ public:
     /// \returns A shared pointer to the new joint object.
     static std::shared_ptr<object::joint_t> create_joint(const std::string& name, object::joint_t::type_t type, uint32_t state_index);
 
+    /// \brief Creates a new attachment between objects with a fixed translation / fixed rotation (FTFR).
+    /// \param x The fixed x translation component.
+    /// \param y The fixed y translation component.
+    /// \param z The fixed z translation component.
+    /// \param qw The fixed w quaternion rotation component.
+    /// \param qx The fixed x quaternion rotation component.
+    /// \param qy The fixed y quaternion rotation component.
+    /// \param qz The fixed z quaternion rotation component.
+    /// \returns A shared pointer to the new attachment.
+    static std::shared_ptr<attachment::attachment_t> create_attachment_ftfr(double_t x, double_t y, double_t z, double_t qw, double_t qx, double_t qy, double_t qz);
+    /// \brief Creates a new attachment between objects with a fixed translation / fixed rotation (FTFR).
+    /// \param x The fixed x translation component.
+    /// \param y The fixed y translation component.
+    /// \param z The fixed z translation component.
+    /// \param roll The fixed roll rotation component.
+    /// \param pitch The fixed pitch rotation component.
+    /// \param yaw The fixed yaw rotation component.
+    /// \returns A shared pointer to the new attachment.
+    static std::shared_ptr<attachment::attachment_t> create_attachment_ftfr(double_t x, double_t y, double_t z, double_t roll, double_t pitch, double_t yaw);
+    static std::shared_ptr<attachment::attachment_t> create_attachment_ftdr(double_t x, double_t y, double_t z, uint32_t qw, uint32_t qx, uint32_t qy, uint32_t qz);
+    static std::shared_ptr<attachment::attachment_t> create_attachment_dtfr(uint32_t x, uint32_t y, uint32_t z, double_t qw, double_t qx, double_t qy, double_t qz);
+    static std::shared_ptr<attachment::attachment_t> create_attachment_dtfr(uint32_t x, uint32_t y, uint32_t z, double_t roll, double_t pitch, double_t yaw);
+    static std::shared_ptr<attachment::attachment_t> create_attachment_dtdr(uint32_t x, uint32_t y, uint32_t z, uint32_t qw, uint32_t qx, uint32_t qy, uint32_t qz);
+
+
     // ADDITION
     /// \brief Adds an object to the design without a parent.
     /// \param object The object to add.
     /// \returns TRUE if the object was added successfully, otherwise FALSE.
     bool add_object(const std::shared_ptr<object::object_t>& object);
-    /// \brief Adds an object to the design with a fixed attachment to a parent.
+    /// \brief Adds an object to the design by attaching it to a parent.
     /// \param object The object to add.
     /// \param parent The parent to attach the object to.
-    /// \param x The fixed x position of the object's frame relative to the parent's frame.
-    /// \param y The fixed y position of the object's frame relative to the parent's frame.
-    /// \param z The fixed z position of the object's frame relative to the parent's frame.
-    /// \param roll The fixed roll (x) angle, in radians, of the object's frame relative to the parent's frame.
-    /// \param pitch The fixed pitch (y) angle, in radians, of the object's frame relative to the parent's frame.
-    /// \param yaw The fixed yaw (z) angle, in radians, of the object's frame relative to the parent's frame.
-    /// \returns TRUE if the object was added successfully, otherwise FALSE.
-    bool add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, double x, double y, double z, double roll, double pitch, double yaw);
-    /// \brief Adds an object to the design with a dynamic attachment to a parent.
-    /// \param object The object to add.
-    /// \param parent The parent to attach the object to.
-    /// \param state_index_x The index of the model state variable that indicates the x position of the object's frame relative to the parent's frame.
-    /// \param state_index_y The index of the model state variable that indicates the y position of the object's frame relative to the parent's frame.
-    /// \param state_index_z The index of the model state variable that indicates the z position of the object's frame relative to the parent's frame.
-    /// \param state_index_qw The index of the model state variable that indicates the qw quaternion rotation of the object's frame relative to the parent's frame.
-    /// \param state_index_qx The index of the model state variable that indicates the qx quaternion rotation of the object's frame relative to the parent's frame.
-    /// \param state_index_qy The index of the model state variable that indicates the qy quaternion rotation of the object's frame relative to the parent's frame.
-    /// \param state_index_qz The index of the model state variable that indicates the qz quaternion rotation of the object's frame relative to the parent's frame.
-    /// \returns TRUE if the object was added successfully, otherwise FALSE.
-    bool add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz);
+    /// \param attachment The attachment from the parent to the object.
+    bool add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, const std::shared_ptr<attachment::attachment_t>& attachment);
+    
     
     // ACCESS
     /// \brief Gets the current set of instructions that specify the model's design.
@@ -87,13 +94,6 @@ private:
     // VARIABLES
     /// \brief The instructions that specify the model's design.
     std::vector<instruction_t> m_instructions;
-
-    // ADDITION
-    /// \brief A base method for adding objects to the design.
-    /// \param object The object to add.
-    /// \param parent The parent to attach the object to.
-    /// \param attachment The attachment to use between the parent and the object.
-    bool add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, const std::shared_ptr<attachment::attachment_t>& attachment);
 };
 
 }}
