@@ -4,6 +4,12 @@
 
 using namespace kinematic_model::geometry::object;
 
+// FACTORY
+std::shared_ptr<joint_t> joint_t::create(const std::string& name, type_t type, uint32_t state_index)
+{
+    return std::make_shared<joint_t>(name, type, state_index);
+}
+
 // CONSTRUCTORS
 joint_t::joint_t(const std::string& name, type_t type, uint32_t state_index)
     : joint_t::object_t(name, object_t::type_t::JOINT),
