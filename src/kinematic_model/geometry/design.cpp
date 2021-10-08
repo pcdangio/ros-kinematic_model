@@ -4,48 +4,11 @@
 
 using namespace kinematic_model::geometry;
 
-// FACTORY
-std::shared_ptr<object::link_t> design_t::create_link(const std::string& name)
-{
-    return std::make_shared<object::link_t>(name);
-}
-std::shared_ptr<object::frame_t> design_t::create_frame(const std::string& name)
-{
-    return std::make_shared<object::frame_t>(name);
-}
-std::shared_ptr<object::joint_t> design_t::create_joint(const std::string& name, object::joint_t::type_t type, uint32_t state_index)
-{
-    return std::make_shared<object::joint_t>(name, type, state_index);
-}
-
 // ADDITION
 bool design_t::add_object(const std::shared_ptr<object::object_t>& object)
 {
     // Call base add_object() with empty parent/attachment.
     return design_t::add_object(object, nullptr, nullptr);
-}
-bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, double x, double y, double z, double roll, double pitch, double yaw)
-{
-    // Create a fixed attachment.
-
-    // Create quaternion from euler rotations.
-    Eigen::Quaterniond orientation = Eigen::AngleAxisd(roll, Eigen::Vector3d::UnitX()) *
-                                     Eigen::AngleAxisd(pitch, Eigen::Vector3d::UnitY()) *
-                                     Eigen::AngleAxisd(yaw, Eigen::Vector3d::UnitZ());
-
-    // Create attachment shared pointer.
-    auto attachment = std::make_shared<attachment::fixed_t>(x, y, z, orientation.w(), orientation.x(), orientation.y(), orientation.z());
-
-    // Call base add_object().
-    return design_t::add_object(object, parent, attachment);
-}
-bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
-{
-    // Create dynamic attachment.
-    auto attachment = std::make_shared<attachment::dynamic_t>(state_index_x, state_index_y, state_index_z, state_index_qw, state_index_qx, state_index_qy, state_index_qz);
-
-    // Call base add_object.
-    return design_t::add_object(object, parent, attachment);
 }
 bool design_t::add_object(const std::shared_ptr<object::object_t>& object, const std::shared_ptr<object::object_t>& parent, const std::shared_ptr<attachment::attachment_t>& attachment)
 {
