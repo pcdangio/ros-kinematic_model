@@ -5,6 +5,8 @@
 
 #include <kinematic_model/geometry/attachment/attachment.hpp>
 
+#include <memory>
+
 namespace kinematic_model {
 namespace geometry {
 namespace attachment {
@@ -14,8 +16,8 @@ class dtfr_t
     : public attachment_t
 {
 public:
-    // CONSTRUCTORS
-    /// \brief Instantiates a new DTFR attachment object.
+    // FACTORY
+    /// \brief Creates a new dynamic translation, fixed rotation (DTFR) attachment.
     /// \param state_index_x The state vector index of the translation x component.
     /// \param state_index_y The state vector index of the translation y component.
     /// \param state_index_z The state vector index of the translation z component.
@@ -23,12 +25,27 @@ public:
     /// \param qx The x component of the quaternion rotation.
     /// \param qy The y component of the quaternion rotation.
     /// \param qz The z component of the quaternion rotation.
-    dtfr_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, double_t qw, double_t qx, double_t qy, double_t qz);
+    /// \returns A shared pointer to the new DTFR attachment.
+    static std::shared_ptr<dtfr_t> create(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, double_t qw, double_t qx, double_t qy, double_t qz);
+    /// \brief Creates a new dynamic translation, fixed rotation (DTFR) attachment.
+    /// \param state_index_x The state vector index of the translation x component.
+    /// \param state_index_y The state vector index of the translation y component.
+    /// \param state_index_z The state vector index of the translation z component.
+    /// \param roll The roll component of the euler rotation.
+    /// \param pitch The x component of the euler rotation.
+    /// \param yaw The y component of the euler rotation.
+    /// \returns A shared pointer to the new DTFR attachment.
+    static std::shared_ptr<dtfr_t> create(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, double_t roll, double_t pitch, double_t yaw);
     
     // METHODS
     transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
 private:
+    // CONSTRUCTORS
+    /// \brief Instantiates an empty DTFR attachment.
+    dtfr_t();
+    dtfr_t(const dtfr_t&) = delete;
+
     // VARIABLES
     /// \brief The state vector index of the dynamic x component of the translation.
     uint32_t m_state_index_x;

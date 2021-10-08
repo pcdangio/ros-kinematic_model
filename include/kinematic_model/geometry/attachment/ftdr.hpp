@@ -5,6 +5,8 @@
 
 #include <kinematic_model/geometry/attachment/attachment.hpp>
 
+#include <memory>
+
 namespace kinematic_model {
 namespace geometry {
 namespace attachment {
@@ -14,8 +16,8 @@ class ftdr_t
     : public attachment_t
 {
 public:
-    // CONSTRUCTORS
-    /// \brief Instantiates a new ftdr attachment object.
+    // FACTORY
+    /// \brief Creates a new fixed translation, dynamic rotation (FTDR) attachment.
     /// \param x The x component of the translation.
     /// \param y The y component of the translation.
     /// \param z The z component of the translation.
@@ -23,12 +25,18 @@ public:
     /// \param state_index_qx The state vector index of the quaternion rotation x component.
     /// \param state_index_qy The state vector index of the quaternion rotation y component.
     /// \param state_index_qz The state vector index of the quaternion rotation z component.
-    ftdr_t(double_t x, double_t y, double_t z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz);
+    /// \returns A shared pointer to the new FTDR attachment.
+    static std::shared_ptr<ftdr_t> create(double_t x, double_t y, double_t z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz);
     
     // METHODS
     transform::transform_t get_transform(const Eigen::VectorXd& state_vector) const override;
 
 private:
+    // CONSTRUCTORS
+    /// \brief Instantiates an empty FTDR attachment.
+    ftdr_t();
+    ftdr_t(const ftdr_t&) = delete;
+
     // VARIABLES
     /// \brief The fixed x component of the translation.
     double_t m_x;
