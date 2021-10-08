@@ -5,7 +5,9 @@ using namespace kinematic_model::geometry::object;
 /// FACTORY
 std::shared_ptr<link_t> link_t::create(const std::string& name)
 {
-    return std::make_shared<link_t>(name);
+    // Create and return shared pointer.
+    // NOTE: std::make_shared doesn't work with private constructors
+    return std::shared_ptr<link_t>(new link_t(name));
 }
 
 /// CONSTRUCTORS

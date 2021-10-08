@@ -12,8 +12,9 @@ dtfr_t::dtfr_t()
 // FACTORY
 std::shared_ptr<dtfr_t> dtfr_t::create(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, double_t qw, double_t qx, double_t qy, double_t qz)
 {
-    // Create instance.
-    std::shared_ptr<dtfr_t> dtfr = std::make_shared<dtfr_t>();
+    // Create shared pointer instance.
+    // NOTE: std::make_shared doesn't work with private constructors.
+    std::shared_ptr<dtfr_t> dtfr(new dtfr_t());
 
     // Store translation state indices.
     dtfr->m_state_index_x = state_index_x;

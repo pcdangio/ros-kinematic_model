@@ -7,7 +7,9 @@ using namespace kinematic_model::geometry::object;
 // FACTORY
 std::shared_ptr<joint_t> joint_t::create(const std::string& name, type_t type, uint32_t state_index)
 {
-    return std::make_shared<joint_t>(name, type, state_index);
+    // Create and return shared pointer.
+    // NOTE: std::make_shared doesn't work with private constructors
+    return std::shared_ptr<joint_t>(new joint_t(name, type, state_index));
 }
 
 // CONSTRUCTORS

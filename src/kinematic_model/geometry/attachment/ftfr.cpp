@@ -12,8 +12,9 @@ ftfr_t::ftfr_t()
 // FACTORY
 std::shared_ptr<ftfr_t> ftfr_t::create(double x, double y, double z, double qw, double qx, double qy, double qz)
 {
-    // Create instance.
-    std::shared_ptr<ftfr_t> ftfr = std::make_shared<ftfr_t>();
+    // Create shared pointer instance.
+    // NOTE: std::make_shared doesn't work with private constructors.
+    std::shared_ptr<ftfr_t> ftfr(new ftfr_t());
 
     // Set fixed transform.
     ftfr->m_transform = transform::transform_t({x, y, z}, {qw, qx, qy, qz});

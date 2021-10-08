@@ -12,8 +12,9 @@ ftdr_t::ftdr_t()
 // FACTORY
 std::shared_ptr<ftdr_t> ftdr_t::create(double x, double y, double z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
 {
-    // Create instance.
-    std::shared_ptr<ftdr_t> ftdr = std::make_shared<ftdr_t>();
+    // Create shared pointer instance.
+    // NOTE: std::make_shared doesn't work with private constructors.
+    std::shared_ptr<ftdr_t> ftdr(new ftdr_t());
 
     // Store translation values.
     ftdr->m_x = x;

@@ -12,8 +12,9 @@ dtdr_t::dtdr_t()
 // FACTORY
 std::shared_ptr<dtdr_t> dtdr_t::create(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
 {
-    // Create instance.
-    std::shared_ptr<dtdr_t> dtdr;
+    // Create shared pointer instance.
+    // NOTE: std::make_shared doesn't work with private constructors.
+    std::shared_ptr<dtdr_t> dtdr(new dtdr_t());
 
     // Store translation indices.
     dtdr->m_state_index_x = state_index_x;
