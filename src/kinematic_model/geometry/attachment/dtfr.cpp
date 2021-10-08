@@ -4,7 +4,7 @@ using namespace kinematic_model::geometry::attachment;
 
 // CONSTRUCTORS
 dtfr_t::dtfr_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, double_t qw, double_t qx, double_t qy, double_t qz)
-    : attachment_t(attachment_t::type_t::DTFR)
+    : attachment_t(attachment_t::type_t::DYNAMIC)
 {
     // Store values.
     dtfr_t::m_state_index_x = state_index_x;

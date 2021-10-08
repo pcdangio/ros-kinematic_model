@@ -18,10 +18,8 @@ public:
     /// \brief A type specifier for an attachment.
     enum class type_t
     {
-        FTFR = 0,   ///< A fixed translation, fixed rotation (FTFR) attachment.
-        FTDR = 1,   ///< A fixed translation, dynamic rotation (FTDR) attachment.
-        DTFR = 2,   ///< A dynamic translation, fixed rotation (DTFR) attachment.
-        DTDR = 3    ///< A dynamic translation, dynamic rotation (DTDR) attachment.
+        FIXED = 0,      ///< An attachment with a fixed transform.
+        DYNAMIC = 1     ///< An attachment with a dynamic transform.
     };
 
     // METHODS

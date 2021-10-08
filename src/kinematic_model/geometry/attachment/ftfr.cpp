@@ -4,7 +4,7 @@ using namespace kinematic_model::geometry::attachment;
 
 // CONSTRUCTORS
 ftfr_t::ftfr_t(double x, double y, double z, double qw, double qx, double qy, double qz)
-    : ftfr_t::attachment_t(attachment_t::type_t::FTFR)
+    : ftfr_t::attachment_t(attachment_t::type_t::FIXED)
 {
     // Create the attachment's fixed transform.
     ftfr_t::m_transform = transform::transform_t({x, y, z}, {qw, qx, qy, qz});

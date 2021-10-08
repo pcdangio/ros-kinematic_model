@@ -4,7 +4,7 @@ using namespace kinematic_model::geometry::attachment;
 
 // CONSTRUCTORS
 ftdr_t::ftdr_t(double x, double y, double z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
-    : attachment_t(attachment_t::type_t::FTDR)
+    : attachment_t(attachment_t::type_t::DYNAMIC)
 {
     // Store values.
     ftdr_t::m_x = x;

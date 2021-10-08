@@ -4,7 +4,7 @@ using namespace kinematic_model::geometry::attachment;
 
 // CONSTRUCTORS
 dtdr_t::dtdr_t(uint32_t state_index_x, uint32_t state_index_y, uint32_t state_index_z, uint32_t state_index_qw, uint32_t state_index_qx, uint32_t state_index_qy, uint32_t state_index_qz)
-    : dtdr_t::attachment_t(attachment_t::type_t::DTDR)
+    : dtdr_t::attachment_t(attachment_t::type_t::DYNAMIC)
 {
     // Store translation indices.
     dtdr_t::m_state_index_x = state_index_x;
