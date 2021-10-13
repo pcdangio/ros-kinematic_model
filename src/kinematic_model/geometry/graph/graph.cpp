@@ -39,6 +39,11 @@ void graph_t::build(const design_t& model_design)
         {
             // Get parent name.
             std::string parent_name = instruction->parent->name();
+            // If parent is a joint, append _child to attach to the joint child frame.
+            if(instruction->parent->object_type() == object::object_t::type_t::JOINT)
+            {
+                parent_name += "_child";
+            }
 
             // Connect vertex with it's parent.
             auto parent_vertex = graph_t::m_vertices.at(parent_name);
