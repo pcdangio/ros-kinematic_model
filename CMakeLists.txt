@@ -26,8 +26,10 @@ add_library(${PROJECT_NAME}
   src/kinematic_model/geometry/object/frame.cpp
   src/kinematic_model/geometry/object/joint.cpp
   src/kinematic_model/geometry/attachment/attachment.cpp
-  src/kinematic_model/geometry/attachment/fixed.cpp
-  src/kinematic_model/geometry/attachment/dynamic.cpp
+  src/kinematic_model/geometry/attachment/ftfr.cpp
+  src/kinematic_model/geometry/attachment/ftdr.cpp
+  src/kinematic_model/geometry/attachment/dtfr.cpp
+  src/kinematic_model/geometry/attachment/dtdr.cpp
   src/kinematic_model/geometry/graph/graph.cpp
   src/kinematic_model/geometry/graph/connection.cpp
   src/kinematic_model/geometry/graph/vertex.cpp

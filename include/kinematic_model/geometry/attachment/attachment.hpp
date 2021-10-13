@@ -18,8 +18,8 @@ public:
     /// \brief A type specifier for an attachment.
     enum class type_t
     {
-        FIXED = 0,      ///< The attachment is fixed and does not change over time.
-        DYNAMIC = 1     ///< The attachment is dynamic and does change over time.
+        FIXED = 0,      ///< An attachment with a fixed transform.
+        DYNAMIC = 1     ///< An attachment with a dynamic transform.
     };
 
     // METHODS

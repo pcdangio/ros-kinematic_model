@@ -6,6 +6,8 @@
 #include <kinematic_model/geometry/object/object.hpp>
 #include <kinematic_model/geometry/attachment/attachment.hpp>
 
+#include <memory>
+
 namespace kinematic_model {
 namespace geometry {
 namespace object {
@@ -24,12 +26,12 @@ public:
         PRISMATIC = 1   ///< A 1DOF joint that translates along an axis.
     };
 
-    // CONSTRUCTORS
-    /// \brief Instantiates a new joint.
+    // FACTORY
+    /// \brief Creates a new joint object.
     /// \param name The unique name of the joint.
-    /// \param type The joint's type.
-    /// \param state_index The index of the joint's state variable in the state vector.
-    joint_t(const std::string& name, type_t type, uint32_t state_index);
+    /// \param type The joint type.
+    /// \param state_index The index of the state vector variable governing the joint position.
+    static std::shared_ptr<joint_t> create(const std::string& name, type_t type, uint32_t state_index);
 
     // METHODS
     /// \brief Sets the definition of the axis for the joint's degree of freedom.
@@ -47,6 +49,14 @@ public:
     type_t joint_type() const;
 
 private:
+    // CONSTRUCTORS
+    /// \brief Instantiates a new joint.
+    /// \param name The unique name of the joint.
+    /// \param type The joint's type.
+    /// \param state_index The index of the state vector variable governing the joint position.
+    joint_t(const std::string& name, type_t type, uint32_t state_index);
+    joint_t(const joint_t&) = delete;
+
     // VARIABLES
     /// \brief The joint's type.
     const type_t m_joint_type;

@@ -5,6 +5,8 @@
 
 #include <kinematic_model/geometry/object/object.hpp>
 
+#include <memory>
+
 namespace kinematic_model {
 namespace geometry {
 namespace object {
@@ -14,10 +16,17 @@ class frame_t
     : public object_t
 {
 public:
+    // FACTORY
+    /// \brief Creates a new frame object.
+    /// \param name The unique name of the frame.
+    static std::shared_ptr<frame_t> create(const std::string& name);
+
+private:
     // CONSTRUCTORS
     /// \brief Instantiates a new frame.
     /// \param name The unique name of the frame.
     frame_t(const std::string& name);
+    frame_t(const frame_t&) = delete; 
 };
 
 }}}
